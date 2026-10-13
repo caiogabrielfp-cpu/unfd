@@ -842,3 +842,8 @@ a.channel-info:hover {
     animation: none;
   }
 }
+
+.footer-credit {
+  color: var(--unfd-gold);
+  font-weight: 700;
+}
