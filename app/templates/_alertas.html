@@ -1,0 +1,10 @@
+{% with mensagens_flash = get_flashed_messages(with_categories=true) %}
+  {% if mensagens_flash %}
+    {% for categoria, texto in mensagens_flash %}
+      <div class="alert alert-unfd alert-unfd--{{ categoria }} d-flex gap-2 align-items-start" role="alert">
+        <i class="bi {% if categoria == 'sucesso' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %}" aria-hidden="true"></i>
+        <span>{{ texto }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}

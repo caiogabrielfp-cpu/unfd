@@ -47,6 +47,7 @@
                 <li class="nav-item"><a class="nav-link{% if request.endpoint == 'home' %} active{% endif %}"{% if request.endpoint == 'home' %} aria-current="page"{% endif %} href="{{ url_for('home') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link{% if request.endpoint == 'sobre' %} active{% endif %}"{% if request.endpoint == 'sobre' %} aria-current="page"{% endif %} href="{{ url_for('sobre') }}">Sobre</a></li>
                 <li class="nav-item"><a class="nav-link{% if request.endpoint == 'contato' %} active{% endif %}"{% if request.endpoint == 'contato' %} aria-current="page"{% endif %} href="{{ url_for('contato') }}">Contato</a></li>
+                <li class="nav-item"><a class="nav-link{% if request.endpoint == 'listar' %} active{% endif %}"{% if request.endpoint == 'listar' %} aria-current="page"{% endif %} href="{{ url_for('listar') }}">Mensagens</a></li>
             </ul>
             <a class="btn btn-unfd btn-sm btn-vestibular mt-4 mt-lg-0" href="{{ url_for('sobre') }}#ingresso">
               <span class="live-dot" aria-hidden="true"></span>Vestibular
@@ -97,6 +98,7 @@
             <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
             <li><a href="{{ url_for('sobre') }}#ingresso">Vestibular</a></li>
             <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            <li><a href="{{ url_for('listar') }}">Mensagens</a></li>
           </ul>
         </div>
         <div class="col-6 col-md-3">

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Mensagens recebidas | UNFD{% endblock %}
+
+{% block description %}Mensagens enviadas ao suporte da UNFD, Universidade Federal de Direito.{% endblock %}
+
+{% block content %}
+    <section class="page-hero">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mensagens</li>
+          </ol>
+        </nav>
+        <h1 class="page-title">Mensagens recebidas</h1>
+        <p class="page-lead">Mensagens enviadas pelo formulário de contato e gravadas no banco de dados.</p>
+      </div>
+      <span class="decor-blob" aria-hidden="true"></span>
+      <span class="decor-dots" aria-hidden="true"></span>
+    </section>
+
+    <section class="section-unfd">
+      <div class="container">
+        {% include "_alertas.html" %}
+
+        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between mb-4">
+          <h2 class="section-title mb-0">
+            {{ mensagens|length }} {% if mensagens|length == 1 %}mensagem{% else %}mensagens{% endif %}
+          </h2>
+          <a class="btn btn-unfd btn-sm" href="{{ url_for('contato') }}">Enviar nova mensagem</a>
+        </div>
+
+        {% if mensagens %}
+          <div class="card card-unfd">
+            <div class="table-responsive">
+              <table class="table table-unfd align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Assunto</th>
+                    <th scope="col">Mensagem</th>
+                    <th scope="col">Enviada em</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for mensagem in mensagens %}
+                    <tr>
+                      <td>{{ mensagem.id }}</td>
+                      <td>{{ mensagem.nome }}</td>
+                      <td><a class="channel-info" href="mailto:{{ mensagem.email }}">{{ mensagem.email }}</a></td>
+                      <td><span class="badge rounded-pill badge-gold">{{ mensagem.assunto }}</span></td>
+                      <td class="col-mensagem">{{ mensagem.descricao }}</td>
+                      <td class="text-nowrap">{{ mensagem.criado_em.strftime('%d/%m/%Y %H:%M') if mensagem.criado_em else '-' }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        {% else %}
+          <div class="card card-unfd">
+            <div class="card-body text-center py-5">
+              <span class="card-icon mx-auto" aria-hidden="true"><i class="bi bi-inbox"></i></span>
+              <h3 class="card-title">Nenhuma mensagem por aqui</h3>
+              <p class="card-text mb-4">Assim que alguém enviar o formulário de contato, a mensagem aparece nesta página.</p>
+              <a class="btn btn-unfd" href="{{ url_for('contato') }}">Enviar a primeira mensagem</a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+{% endblock %}

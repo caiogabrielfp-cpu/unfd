@@ -13,8 +13,8 @@
             <li class="breadcrumb-item active" aria-current="page">Contato</li>
           </ol>
         </nav>
-        <h1 class="page-title">Entre em contato com a UNFD</h1>
-        <p class="page-lead">Tire dúvidas sobre o vestibular, o curso e o campus.</p>
+        <h1 class="page-title">Fale com o suporte da UNFD</h1>
+        <p class="page-lead">Ficou com alguma dúvida? Envie sua mensagem e nossa equipe responde por e-mail.</p>
       </div>
       <span class="decor-blob" aria-hidden="true"></span>
       <span class="decor-dots" aria-hidden="true"></span>
@@ -25,9 +25,10 @@
         <div class="row g-5">
           <div class="col-lg-7">
             <h2 class="section-title">Envie sua mensagem</h2>
+            {% include "_alertas.html" %}
             <div class="card card-unfd">
               <div class="card-body p-4">
-                <form class="needs-validation" novalidate data-success="Mensagem enviada. Vamos responder no e-mail informado.">
+                <form class="needs-validation" method="POST" action="{{ url_for('contato') }}" novalidate>
                   <div class="row g-3">
                     <div class="col-md-6">
                       <div class="form-floating">
@@ -65,6 +66,7 @@
                     </div>
                     <div class="col-12">
                       <button type="submit" class="btn btn-unfd">Enviar mensagem</button>
+                      <a class="btn btn-ghost-quiet ms-2" href="{{ url_for('listar') }}">Ver mensagens</a>
                     </div>
                   </div>
                 </form>
