@@ -25,24 +25,32 @@ const toastElement = document.getElementById('toast-unfd');
 
 document.querySelectorAll('.needs-validation').forEach(function (form) {
   form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
     if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
       form.classList.add('was-validated');
       const firstInvalid = form.querySelector(':invalid');
       if (firstInvalid) firstInvalid.focus();
       return;
     }
 
-    form.reset();
-    form.classList.remove('was-validated');
+    // Formularios com data-success nao tem backend: apenas mostram um aviso.
+    if (form.dataset.success) {
+      event.preventDefault();
+      form.reset();
+      form.classList.remove('was-validated');
 
-    const modalElement = form.closest('.modal');
-    if (modalElement) bootstrap.Modal.getOrCreateInstance(modalElement).hide();
+      const modalElement = form.closest('.modal');
+      if (modalElement) bootstrap.Modal.getOrCreateInstance(modalElement).hide();
 
-    if (toastElement) {
-      toastElement.querySelector('.toast-body').textContent = form.dataset.success;
-      bootstrap.Toast.getOrCreateInstance(toastElement).show();
+      if (toastElement) {
+        toastElement.querySelector('.toast-body').textContent = form.dataset.success;
+        bootstrap.Toast.getOrCreateInstance(toastElement).show();
+      }
+      return;
     }
+
+    // Os demais seguem para o servidor (Flask) normalmente.
+    form.classList.add('was-validated');
   });
 });
